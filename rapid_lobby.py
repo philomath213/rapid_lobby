@@ -4,6 +4,7 @@ from queue import Queue
 
 BUFFER_SIZE = 1024
 
+
 class Server(object):
     def __init__(self, host, port, max_clients_num):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -131,7 +132,7 @@ class Client():
     def sendMsg(self, msg):
         try:
             self.socket.send(msg.encode())
-        except Exception as e:
+        except Exception:
             raise ServerError("Server isn't running")
 
     def stopClient(self):
@@ -171,4 +172,4 @@ class RecvHandler(threading.Thread):
         """set the stop event and wait for the thread to stop"""
         # set the stop event then call the original join method
         self._stopevent.set()
-        #threading.Thread.join(self)
+        # threading.Thread.join(self)
